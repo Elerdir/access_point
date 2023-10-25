@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class App {
 

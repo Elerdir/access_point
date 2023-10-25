@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserToApp {
 
-    private int userId;
+    private Long userId;
 
-    private int appId;
+    private Long appId;
 
     public static Collection<UserToApp> fromEntities(Collection<UserToAppEntity> userToApps) {
         return userToApps.stream()
