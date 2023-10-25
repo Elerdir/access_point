@@ -1,17 +1,8 @@
 package cz.ess.server.user.login;
 
-import cz.ess.server.user.dto.User;
 import cz.ess.server.user.exchange.UserResponse;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RequestMapping("/api/adm")
 @RestController
