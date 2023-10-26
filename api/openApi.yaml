@@ -1,0 +1,247 @@
+openapi: "3.0.3"
+info:
+  title: "access_point API"
+  description: "access_point API"
+  version: "1.0.0"
+servers:
+  - url: "https://access_point"
+paths:
+  /api/registration:
+    post:
+      summary: "POST api/registration"
+      operationId: "registration"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegistrationRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /api/registration/admin:
+    post:
+      summary: "POST api/registration/admin"
+      operationId: "adminRegistration"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegistrationRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /api/adm/login:
+    post:
+      summary: "POST api/adm/login"
+      operationId: "login"
+      parameters:
+        - name: "user"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+        - name: "password"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /api/adm/logout:
+    post:
+      summary: "POST api/adm/logout"
+      operationId: "logout"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+  /api/app:
+    get:
+      summary: "GET api/app"
+      operationId: "getApp"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "integer"
+              format: "int64"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/App"
+    post:
+      summary: "POST api/app"
+      operationId: "addApp"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/App"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+    patch:
+      summary: "PATCH api/app"
+      operationId: "updateApp"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/App"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+    delete:
+      summary: "DELETE api/app"
+      operationId: "deleteApp"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "integer"
+              format: "int64"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+  /api/app/list:
+    get:
+      summary: "GET api/app/list"
+      operationId: "getAllApps"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AppResponse"
+components:
+  schemas:
+    RegistrationRequest:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+        password:
+          type: "string"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        birthday:
+          type: "string"
+          format: "date"
+    UserToApp:
+      type: "object"
+      properties:
+        userId:
+          type: "integer"
+          format: "int64"
+        appId:
+          type: "integer"
+          format: "int64"
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        password:
+          type: "string"
+        email:
+          type: "string"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        birthday:
+          type: "string"
+          format: "date"
+        administration:
+          type: "boolean"
+        token:
+          type: "string"
+        needChangePassword:
+          type: "boolean"
+        userToApps:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/UserToApp"
+    App:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        appName:
+          type: "string"
+        defaultApp:
+          type: "boolean"
+        url:
+          type: "string"
+    UserResponse:
+      type: "object"
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        apps:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/App"
+    AppResponse:
+      type: "object"
+      properties:
+        allApps:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/App"
