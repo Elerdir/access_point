@@ -178,7 +178,7 @@ components:
           type: "string"
         lastName:
           type: "string"
-        birthday:
+        birthDate:
           type: "string"
           format: "date"
     UserToApp:
@@ -204,7 +204,7 @@ components:
           type: "string"
         lastName:
           type: "string"
-        birthday:
+        birthDate:
           type: "string"
           format: "date"
         administration:
