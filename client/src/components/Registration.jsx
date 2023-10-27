@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "../api/Axios";
 import {Signpost} from "./Signpost";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
@@ -156,6 +156,8 @@ export const Registration = () => {
 						required
 						aria-invalid={validMatchPassword ? "false" : "true"}
 						aria-describedby="confirmnote"
+						onFocus={() => setMatchPasswordFocus(true)}
+						onBlur={() => setMatchPasswordFocus(false)}
 					/>
 					<p id="confirmnote" className={matchPasswordFocus && !validMatchPassword ? "instructions" : "offscreen"}>
 						<FontAwesomeIcon icon={faInfoCircle} />
