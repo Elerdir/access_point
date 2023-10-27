@@ -5,7 +5,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const PASSWORD_REGEX = /^(?=.*[a-z]).{3,24}$/;
-const REGISTER_URL = '/api/registration';
+const REGISTER_URL = '/registration';
 
 export const Registration = () => {
 	const [firstName, setFirstName] = useState('');

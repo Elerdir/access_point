@@ -4,7 +4,7 @@ import axios from "../api/Axios";
 import AuthContext from "../context/AuthProvider";
 
 // todo: správný odkaz
-const LOGIN_URL = '/api';
+const LOGIN_URL = '/';
 
 export const Login = () => {
 	const { setAuth } = useContext(AuthContext);
