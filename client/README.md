@@ -1,3 +1,12 @@
+# Co doinstalovat:
+npm install react-router-dom axios
+npm i @fortawesome/react-fontawesome@latest @fortawesome/free-solid-svg-icons @fortawesome/fontawesome-svg-core 
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
