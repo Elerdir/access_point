@@ -91,7 +91,7 @@ public class RegistrationService {
                 .email(registrationRequest.getEmail())
                 .firstName(registrationRequest.getFirstName())
                 .lastName(registrationRequest.getLastName())
-                .birthday(registrationRequest.getBirthday())
+                .birthday(registrationRequest.getBirthDate())
                 .administration(false)
                 .needChangePassword(changePwd)
                 .userToApps(Collections.emptyList())
