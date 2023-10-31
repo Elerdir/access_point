@@ -8,6 +8,12 @@ const PASSWORD_REGEX = /^(?=.*[a-z]).{3,24}$/;
 const REGISTER_URL = '/registration';
 
 export const Registration = () => {
+	// todo: předělat na objekt?
+	//  const [person, setPerson] = useState({
+	//     firstName: 'Barbara',
+	//     lastName: 'Hepworth',
+	//     email: 'bhepworth@sculpture.com'
+	//   });
 	const [firstName, setFirstName] = useState('');
 
 	const [lastName, setLastName] = useState('');

@@ -1,5 +1,5 @@
 export const Signpost = () => {
 	return (
-		<>Rozcestník</>
+		<section>Rozcestník</section>
 	);
 };
