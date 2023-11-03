@@ -20,5 +20,5 @@ public class RegistrationRequest {
 
     private String lastName;
 
-    private LocalDate birthday;
+    private LocalDate birthDate;
 }
