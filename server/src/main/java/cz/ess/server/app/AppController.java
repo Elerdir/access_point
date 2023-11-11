@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/app")
+@CrossOrigin("*")
 public class AppController {
 
     private final AppService appService;

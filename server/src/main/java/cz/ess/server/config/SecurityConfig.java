@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -23,19 +24,19 @@ public class SecurityConfig {
         this.tokenFilter = tokenFilter;
     }
 
+
+
     @Bean
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.GET, "/api/core/version").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/registration").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);
 
-        http.addFilterBefore(
-                tokenFilter,
-                UsernamePasswordAuthenticationFilter.class
-        );
+        return http.build();
     }
 
     @Bean

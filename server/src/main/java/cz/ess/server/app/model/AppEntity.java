@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Table(name = "user", schema = "app")
+@Table(name = "app", schema = "app")
 public class AppEntity {
 
     @Id

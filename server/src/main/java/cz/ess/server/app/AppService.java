@@ -25,7 +25,7 @@ public class AppService {
 
     public Collection<App> getDefaultApps() {
 
-        Collection<AppEntity> defaultApps = appRepository.findAllByDefaultApp();
+        Collection<AppEntity> defaultApps = appRepository.findAllByDefaultApp(true);
 
         if (defaultApps.isEmpty()) {
             return Collections.emptyList();

@@ -48,7 +48,7 @@ public class User {
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
-                .birthday(user.getBirthday())
+                .birthday(user.getBirthDate())
                 .administration(user.isAdministration())
                 .userToApps(UserToApp.fromEntities(user.getUserToApps()))
                 .build();
