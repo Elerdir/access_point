@@ -48,6 +48,7 @@ public class RegistrationService {
 
         if (foundUser.isPresent()) {
             throw new RuntimeException(String.format("User %s existing.", registrationRequest.getEmail()));
+
         }
 
         User newUser = createUser(registrationRequest, changePwd);
@@ -56,7 +57,15 @@ public class RegistrationService {
 
         User user = User.fromEntity(userRepository.findByEmail(registrationRequest.getEmail()).get());
 
-        String token = jwtTokenService.generateJwtToken(registrationRequest.getEmail(), user.isAdministration());
+        String token = null;
+        try {
+            token = jwtTokenService.generateJwtToken(registrationRequest.getEmail(), user.isAdministration());
+        } catch (Exception e) {
+            userRepository.delete(UserEntity.fromDto(user));
+            userRepository.flush();
+
+            throw new RuntimeException(String.format("User %s is not saved. Anythink error wit create JWT token.", registrationRequest.getEmail()));
+        }
 
         Collection<App> defaultApps = appService.getDefaultApps();
 
@@ -82,7 +91,6 @@ public class RegistrationService {
                 .apps(appService.getAllApps())
                 .build();
     }
-
 
 
     private User createUser(RegistrationRequest registrationRequest, boolean changePwd) {

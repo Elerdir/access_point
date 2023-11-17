@@ -6,6 +6,17 @@ info:
 servers:
   - url: "https://access_point"
 paths:
+  /api/core/version:
+    get:
+      summary: "GET api/core/version"
+      operationId: "getVersion"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Version"
   /api/registration:
     post:
       summary: "POST api/registration"
@@ -245,3 +256,10 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/App"
+    Version:
+      type: "object"
+      properties:
+        buildVersion:
+          type: "string"
+        buildTime:
+          type: "string"
