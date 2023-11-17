@@ -5,6 +5,7 @@ import cz.ess.server.jwt.model.JwtTokenEntity;
 import cz.ess.server.jwt.repository.JwtTokenRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ import java.util.stream.Collectors;
 public class JwtTokenService {
 
     private final JwtTokenRepository jwtTokenRepository;
+
+    @Value("${jwt.secretkey}")
+    private String secretKey;
 
     public JwtTokenService(JwtTokenRepository jwtTokenRepository) {
         this.jwtTokenRepository = jwtTokenRepository;
@@ -52,7 +56,6 @@ public class JwtTokenService {
     }
 
     public String generateJwtToken(String username, boolean isAdmin) {
-        String secretKey = "mySecretKey";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList(isAdmin ? "ROLE_ADMIN" : "ROLE_USER");
 
@@ -66,8 +69,8 @@ public class JwtTokenService {
                                 .collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 600000))
-                .signWith(SignatureAlgorithm.HS512,
-                        secretKey.getBytes()).compact();
+                .signWith(SignatureAlgorithm.HS512, secretKey.getBytes())
+                .compact();
 
         addToken(token, username, isAdmin);
 

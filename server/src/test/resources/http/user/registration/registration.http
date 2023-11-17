@@ -2,12 +2,9 @@ POST http://localhost:8081/ap/api/registration
 Content-Type: application/json
 
 {
-  "RegistrationRequest" : {
-    "email": "v@v.h",
-    "password": "aaaa",
-    "firstName": "s",
-    "lastName": "d",
-    "birthDate": "12.02.1990"
-  }
-
+  "email": "v@v.h",
+  "password": "aaaa",
+  "firstName": "s",
+  "lastName": "d",
+  "birthDate": "1990-02-12"
 }

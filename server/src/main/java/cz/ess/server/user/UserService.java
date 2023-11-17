@@ -26,6 +26,6 @@ public class UserService {
         User user = User.fromEntity(foundUser.get());
 
 
-        return null;
+        return user.getPassword().equals(pwd) ? Optional.of(user) : Optional.empty();
     }
 }

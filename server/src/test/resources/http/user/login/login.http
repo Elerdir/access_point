@@ -1,0 +1,2 @@
+POST http://localhost:8081/ap/api/adm/login?user=v@v.h&password=aaaa
+Content-Type: application/json
