@@ -38,8 +38,7 @@ export const Signpost = () => {
 
 	return (
 		<section>
-			<h1>Rozcestník</h1>
-			<h4>Tvoje programy:</h4>
+			<h2>Vyber si službu</h2>
 			{getAllApps.length}
 		</section>
 	);
