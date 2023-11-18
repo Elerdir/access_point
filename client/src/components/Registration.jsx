@@ -15,11 +15,8 @@ export const Registration = () => {
 	//     email: 'bhepworth@sculpture.com'
 	//   });
 	const [firstName, setFirstName] = useState('');
-
 	const [lastName, setLastName] = useState('');
-
 	const [birthDate, setBirthDate] = useState('');
-
 	const [email, setEmail] = useState('');
 
 	const [password, setPassword] = useState('');
@@ -47,16 +44,18 @@ export const Registration = () => {
 
 		// if button enabled with JS hack. Ochrana před hacknutím
 		const v5 = PASSWORD_REGEX.test(password);
+
 		if (!v5) {
 			setErrMsg("Invalid Entry");
 			return;
 		}
+
 		try {
 			const response = await axios.post(REGISTER_URL,
-				JSON.stringify({ firstName, lastName, birthDate, email, password }),
+				JSON.stringify({ email, password, firstName, lastName, birthDate }),
 				{
 					headers: { 'Content-Type': 'application/json' },
-					withCredentials: true
+					withCredentials: false
 				}
 			);
 			setSuccess(true);
@@ -68,7 +67,6 @@ export const Registration = () => {
 			setPassword('');
 			setMatchPassword('');
 		} catch (err) {
-			// není připojení k serveru, možná ho stačí spustit
 			if (!err?.response) {
 				setErrMsg('No Server Response');
 			// 	jméno už je v db, todo: otestovat jestli funguje a co kontroluje

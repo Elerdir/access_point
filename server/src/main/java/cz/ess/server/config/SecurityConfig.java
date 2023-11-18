@@ -23,7 +23,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.GET, "/api/core/version").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/registration").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/ap/api/registration").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/ap/api/login").permitAll()
                         .anyRequest().permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);
@@ -36,7 +37,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
+        config.setAllowCredentials(false);
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
