@@ -82,6 +82,7 @@ export const Registration = () => {
 	return (
 		<>
 			{success ? (
+				// todo: po registraci zústane url: /registration
 				<>
 					<Signpost />
 				</>

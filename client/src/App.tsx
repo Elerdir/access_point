@@ -6,6 +6,7 @@ import {Registration} from "./components/Registration";
 import {Signpost} from "./components/Signpost";
 
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>
