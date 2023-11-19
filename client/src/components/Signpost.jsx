@@ -1,45 +1,26 @@
-import axios from "../api/Axios";
+import {useEffect, useState} from "react";
+import {getAllApps} from "../api/Axios";
 
 export const Signpost = () => {
+	const [allApps, setAllApps] = useState([]);
 
-	const checkStatus = response => {
-		if (response.ok) {
-			return response;
-		}
-		// convert non-2xx HTTP responses into errors:
-		const error = new Error(response.statusText);
-		error.response = response;
-		return Promise.reject(error);
-	}
+	const fetchAllApps = () =>
+		getAllApps()
+			.then(res => res.json())
+			.then(data => {
+				setAllApps(data.allApps);
+			})
 
-	const getAllApps = () =>
-		fetch( "http://localhost:8081/ap/api/app", {
-			headers: {"Content-Type": "application/json"},
-			method: "GET"
-		}).then(checkStatus);
-
-	// const handleSubmit = async () => {
-	// 	try {
-	// 		const response = await axios.get(REGISTER_URL,
-	// 			JSON.stringify({  }),
-	// 			{
-	// 				headers: { 'Content-Type': 'application/json' },
-	// 				withCredentials: false
-	// 			}
-	// 		);
-	//
-	// 	} catch (err) {
-	// 		if (!err?.response) {
-	// 		} else if (err.response?.status === 409) {
-	// 		} else {
-	// 		}
-	// 	}
-	// }
+	useEffect(() => {
+		fetchAllApps();
+	}, []);
 
 	return (
 		<section>
 			<h2>Vyber si službu</h2>
-			{getAllApps.length}
+			{allApps.map(({ appName, url }) => {
+				return <p><a href={url}>{appName}</a> </p>
+			})}
 		</section>
 	);
 };
