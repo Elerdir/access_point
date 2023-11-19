@@ -18,8 +18,8 @@ export const Signpost = () => {
 	return (
 		<section>
 			<h2>Vyber si službu</h2>
-			{allApps.map(({ appName, url }) => {
-				return <p><a href={url}>{appName}</a> </p>
+			{allApps.map(({ id, appName, url }) => {
+				return <p key={id}><a href={url}>{appName}</a> </p>
 			})}
 		</section>
 	);

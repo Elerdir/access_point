@@ -3,12 +3,11 @@ import {useContext, useEffect, useState} from "react";
 import axios from "../api/Axios";
 import AuthContext from "../context/AuthProvider";
 
-// todo: správný odkaz
-const LOGIN_URL = '/';
+const LOGIN_URL = '/adm/login';
 
 export const Login = () => {
 	const { setAuth } = useContext(AuthContext);
-	const [user, setUser] = useState('');
+	const [user, setUser] = useState("");
 	const [password, setPassword] = useState('');
 	const [errMsg, setErrMsg] = useState('');
 	const [success, setSuccess] = useState(false);
@@ -21,18 +20,17 @@ export const Login = () => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post(LOGIN_URL,
-				JSON.stringify({ user, password }),
+			const response = await axios.post(
+				LOGIN_URL + "?user=" + user + "&password=" + password,
 				{
 					headers: { 'Content-Type': 'application/json' },
-					withCredentials: true
+					withCredentials: false
 				}
 			);
-			console.log(JSON.stringify(response?.data));
-			//console.log(JSON.stringify(response));
-			const accessToken = response?.data?.accessToken;
-			const roles = response?.data?.roles;
-			setAuth({ user, password, roles, accessToken });
+			console.log(response?.data?.user?.token);
+			const token = response?.data?.user?.token;
+			const administration = response?.data?.user?.administration;
+			setAuth({ user, password, administration, token });
 			setUser('');
 			setPassword('');
 			setSuccess(true);
