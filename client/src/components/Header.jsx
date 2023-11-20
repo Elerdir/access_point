@@ -5,15 +5,16 @@ import AuthContext from "../context/AuthProvider";
 export const Header = (userObject) => {
 	const { auth } = useContext(AuthContext);
 	const [showProfile, setShowProfile] = useState(false);
-
+	const firstName = userObject.userObject.firstName;
+	const lastName = userObject.userObject.lastName;
 	const handleOnClick = () => {
 		setShowProfile(!showProfile);
 	}
 
 	return (
 		<div id={"header"}>
-			<div onClick={handleOnClick}>{userObject.userObject.firstName + " " + userObject.userObject.lastName}</div>
-			{showProfile && <div id={"profile"}>{auth.user} <a href={"/"}> Odhlášení </a> Profil Změna hesla</div>}
+			<div onClick={handleOnClick}>{firstName.slice(0, 1) + lastName.slice(0, 1)}</div>
+			{showProfile && <div id={"profile"}>{firstName + " " + lastName} {auth.user} <a href={"/"}> Odhlášení </a> Profil Změna hesla</div>}
 		</div>
 	);
 };
