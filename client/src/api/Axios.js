@@ -22,6 +22,17 @@ export const getAllApps = () =>
 		method: "GET"
 	}).then(checkStatus);
 
+// export const getAllUsers = () =>
+// 	fetch(baseURL + "/", {
+// 		headers: {"Content-Type": "application/json"},
+// 		method: "GET"
+// 	}).then(checkStatus);
+
+
+
+
+
+
 
 // export const getAllApps = () => {
 // 	axios.get("/app/list")
