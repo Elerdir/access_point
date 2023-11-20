@@ -3,6 +3,7 @@ import axios from "../api/Axios";
 import {Signpost} from "./Signpost";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Administration} from "./Administration";
 
 const PASSWORD_REGEX = /^(?=.*[a-z]).{3,24}$/;
 const REGISTER_URL = '/registration';
@@ -29,6 +30,9 @@ export const Registration = () => {
 
 	const [errMsg, setErrMsg] = useState('');
 	const [success, setSuccess] = useState(false);
+
+	const [administration, setAdministration] = useState(false);
+	const [userObject, setUserObject] = useState({});
 
 	useEffect(() => {
 		setValidPassword(PASSWORD_REGEX.test(password));
@@ -58,6 +62,12 @@ export const Registration = () => {
 					withCredentials: false
 				}
 			);
+
+			const token = response?.data?.user?.token;
+
+			setAdministration(response?.data?.user?.administration);
+			setUserObject(response?.data?.user);
+
 			setSuccess(true);
 
 			setFirstName('');
@@ -81,12 +91,17 @@ export const Registration = () => {
 
 	return (
 		<>
-			{success ? (
+			{administration ? (
 				// todo: po registraci zústane url: /registration
 				<>
-					<Signpost />
+					<Administration userObject={userObject}/>
 				</>
-			) : (
+			) :
+				success ? (
+					<>
+						<Signpost userObject={userObject}/>
+					</>
+					) : (
 				<section>
 					<p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 					<h2>Registruj se</h2>
