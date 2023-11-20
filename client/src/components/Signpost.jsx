@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 import {getAllApps} from "../api/Axios";
+import {Header} from "./Header";
 
-export const Signpost = () => {
+export const Signpost = (userObject) => {
 	const [allApps, setAllApps] = useState([]);
 
 	const fetchAllApps = () =>
@@ -16,11 +17,15 @@ export const Signpost = () => {
 	}, []);
 
 	return (
-		<section>
-			<h2>Vyber si službu</h2>
-			{allApps.map(({ id, appName, url }) => {
-				return <p key={id}><a href={url}>{appName}</a> </p>
-			})}
-		</section>
+		<>
+			<Header userObject={userObject.userObject}/>
+			<section>
+				<h2>Vyber si službu</h2>
+				{allApps.map(({ id, appName, url }) => {
+					return <p key={id}><a href={url}>{appName}</a> </p>
+				})}
+			</section>
+		</>
+
 	);
 };

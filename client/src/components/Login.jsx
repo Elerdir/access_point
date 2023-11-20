@@ -11,6 +11,7 @@ export const Login = () => {
 	const [password, setPassword] = useState('');
 	const [errMsg, setErrMsg] = useState('');
 	const [success, setSuccess] = useState(false);
+	const [userObject, setUserObject] = useState({});
 
 	useEffect(() => {
 		setErrMsg('');
@@ -27,9 +28,10 @@ export const Login = () => {
 					withCredentials: false
 				}
 			);
-			console.log(response?.data?.user?.token);
 			const token = response?.data?.user?.token;
 			const administration = response?.data?.user?.administration;
+
+			setUserObject(response?.data?.user);
 			setAuth({ user, password, administration, token });
 			setUser('');
 			setPassword('');
@@ -51,8 +53,13 @@ export const Login = () => {
 		<>
 			{success ? (
 				<>
-					<Signpost />
+					<Signpost userObject={userObject}/>
 				</>
+			// ) :
+			// 	success &&  ? (
+			// 	<>
+			// 		<Signpost />
+			// 	</>
 			) : (
 				<section>
 					<p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
