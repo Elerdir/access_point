@@ -2,6 +2,7 @@ import {Signpost} from "./Signpost";
 import {useContext, useEffect, useState} from "react";
 import axios from "../api/Axios";
 import AuthContext from "../context/AuthProvider";
+import "./Login.css";
 
 const LOGIN_URL = '/adm/login';
 
@@ -61,7 +62,7 @@ export const Login = () => {
 			// 		<Signpost />
 			// 	</>
 			) : (
-				<section>
+				<section id={"login"}>
 					<p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 					<h2>Přihlaš se</h2>
 					<form onSubmit={handleSubmit}>
