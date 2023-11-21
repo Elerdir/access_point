@@ -3,7 +3,7 @@ import {getAllApps} from "../api/Axios";
 import {Header} from "./Header";
 import "./Signpost.css";
 
-export const Signpost = (userObject) => {
+export const Signpost = () => {
 	const [allApps, setAllApps] = useState([]);
 
 	const fetchAllApps = () =>
@@ -19,7 +19,7 @@ export const Signpost = (userObject) => {
 
 	return (
 		<>
-			<Header userObject={userObject.userObject}/>
+			<Header />
 			<section id={"signpost"}>
 				<h2>Vyber si službu</h2>
 				{allApps.map(({ id, appName, url }) => {

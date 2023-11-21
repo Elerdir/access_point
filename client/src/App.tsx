@@ -5,19 +5,22 @@ import {Login} from "./components/Login";
 import {Registration} from "./components/Registration";
 import {Signpost} from "./components/Signpost";
 import {LostPassword} from "./components/LostPassword";
+import {UserProvider} from "./context/UserContext";
 
 function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />}/>
-          <Route path="/registration" element={<Registration />}/>
-          <Route path="/signpost" element={<Signpost />}/>
-          <Route path="/lost-password" element={<LostPassword />}/>
-        </Routes>
-      </BrowserRouter>
+      <UserProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Login />}/>
+              <Route path="/registration" element={<Registration />}/>
+              <Route path="/signpost" element={<Signpost />}/>
+              <Route path="/lost-password" element={<LostPassword />}/>
+            </Routes>
+          </BrowserRouter>
+      </UserProvider>
     </div>
   );
 }

@@ -1,20 +1,20 @@
-import {Signpost} from "./Signpost";
 import {useContext, useEffect, useState} from "react";
 import axios from "../api/Axios";
 import AuthContext from "../context/AuthProvider";
 import "./Login.css";
-import {Administration} from "./Administration";
+import {useNavigate} from "react-router-dom";
+import UserContext from "../context/UserContext";
 
 const LOGIN_URL = '/adm/login';
 
 export const Login = () => {
 	const { setAuth } = useContext(AuthContext);
+	const { setUserObject } = useContext(UserContext);
 	const [user, setUser] = useState("");
 	const [password, setPassword] = useState('');
 	const [errMsg, setErrMsg] = useState('');
-	const [success, setSuccess] = useState(false);
-	const [userObject, setUserObject] = useState({});
 	const [administration, setAdministration] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setErrMsg('');
@@ -33,15 +33,23 @@ export const Login = () => {
 			);
 
 			const token = response?.data?.user?.token;
+			const userO = response?.data?.user;
 
 			setAdministration(response?.data?.user?.administration);
-			setUserObject(response?.data?.user);
+			setUserObject({userO});
 			setAuth({ user, password, administration, token });
 			setUser('');
 			setPassword('');
-			setSuccess(true);
+
+			if (administration) {
+				navigate("/administration");
+			} else {
+				navigate("/signpost");
+			}
 		} catch (err) {
+			console.log(err)
 			if (!err?.response) {
+				//todo: tohle napíše i když je server v pořádku a je chyba v kódu
 				setErrMsg('No Server Response');
 			} else if (err.response?.status === 400) {
 				setErrMsg('Missing Username or Password');
@@ -53,14 +61,8 @@ export const Login = () => {
 		}
 	}
 
-	let content;
-
-	if (administration) {
-		content = <Administration userObject={userObject}/>;
-	} else if (success) {
-		content = <Signpost userObject={userObject}/>;
-	} else {
-		content = <section id={"login"}>
+	return (
+		<section id={"login"}>
 			<p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 			<h2>Přihlaš se</h2>
 			<form onSubmit={handleSubmit}>
@@ -83,45 +85,5 @@ export const Login = () => {
 				<button><a href={"/lost-password"}>Zapomenuté heslo?</a></button>
 			</form>
 		</section>
-	}
-
-	return (
-		<>
-			{content}
-			{/*{success ? (*/}
-			{/*	<>*/}
-			{/*		<Administration />*/}
-			{/*	</>*/}
-			{/*) :*/}
-			{/*	success ? (*/}
-			{/*	<>*/}
-			{/*		<Signpost userObject={userObject}/>*/}
-			{/*	</>*/}
-			{/*) : (*/}
-			{/*	<section id={"login"}>*/}
-			{/*		<p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>*/}
-			{/*		<h2>Přihlaš se</h2>*/}
-			{/*		<form onSubmit={handleSubmit}>*/}
-			{/*			<input*/}
-			{/*				type="email"*/}
-			{/*				placeholder="zadej email"*/}
-			{/*				onChange={(e) => setUser(e.target.value)}*/}
-			{/*				value={user}*/}
-			{/*				required*/}
-			{/*			/>*/}
-			{/*			<input*/}
-			{/*				type="password"*/}
-			{/*				placeholder="zadej heslo"*/}
-			{/*				onChange={(e) => setPassword(e.target.value)}*/}
-			{/*				value={password}*/}
-			{/*				required*/}
-			{/*			/>*/}
-			{/*			<button type="submit">Přihlásit</button>*/}
-			{/*			<button>Registrace</button>*/}
-			{/*			<button>Zapomenuté heslo?</button>*/}
-			{/*		</form>*/}
-			{/*	</section>*/}
-			{/*)}*/}
-		</>
 	);
 };
