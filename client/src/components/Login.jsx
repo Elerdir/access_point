@@ -13,7 +13,6 @@ export const Login = () => {
 	const [user, setUser] = useState("");
 	const [password, setPassword] = useState('');
 	const [errMsg, setErrMsg] = useState('');
-	const [administration, setAdministration] = useState(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -33,9 +32,9 @@ export const Login = () => {
 			);
 
 			const token = response?.data?.user?.token;
+			const administration = response?.data?.user?.administration;
 			const userO = response?.data?.user;
 
-			setAdministration(response?.data?.user?.administration);
 			setUserObject({userO});
 			setAuth({ user, password, administration, token });
 			setUser('');
