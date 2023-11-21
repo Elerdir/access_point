@@ -35,7 +35,7 @@ public class User {
 
     private Collection<UserToApp> userToApps;
 
-    public Collection<User> fromEntities(Collection<UserEntity> userEntities) {
+    public static Collection<User> fromEntities(Collection<UserEntity> userEntities) {
         return userEntities.stream()
                 .map(User::fromEntity)
                 .collect(Collectors.toList());
