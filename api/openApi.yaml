@@ -6,6 +6,23 @@ info:
 servers:
   - url: "https://access_point"
 paths:
+  /api/user/all:
+    post:
+      summary: "POST api/user/all"
+      operationId: "getAllUsersForAdmin"
+      parameters:
+        - name: "Authorization"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserListResponse"
   /api/registration:
     post:
       summary: "POST api/registration"
@@ -167,6 +184,17 @@ paths:
                 $ref: "#/components/schemas/AppResponse"
 components:
   schemas:
+    UserListResponse:
+      type: "object"
+      properties:
+        users:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/User"
+        apps:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/App"
     RegistrationRequest:
       type: "object"
       properties:
