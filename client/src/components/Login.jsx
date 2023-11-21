@@ -79,8 +79,8 @@ export const Login = () => {
 					required
 				/>
 				<button type="submit">Přihlásit</button>
-				<button>Registrace</button>
-				<button>Zapomenuté heslo?</button>
+				<button><a href={"/registration"}>Registrace</a></button>
+				<button><a href={"/lost-password"}>Zapomenuté heslo?</a></button>
 			</form>
 		</section>
 	}
