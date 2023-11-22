@@ -8,8 +8,8 @@ import UserContext from "../context/UserContext";
 const LOGIN_URL = '/adm/login';
 
 export const Login = () => {
-	const { setAuth } = useContext(AuthContext);
-	const { setUserObject } = useContext(UserContext);
+	const { setAuth }: any = useContext(AuthContext);
+	const { setUserObject }: any = useContext(UserContext);
 	const [user, setUser] = useState("");
 	const [password, setPassword] = useState('');
 	const [errMsg, setErrMsg] = useState('');
@@ -19,7 +19,7 @@ export const Login = () => {
 		setErrMsg('');
 	}, [user, password])
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
 
 		try {
@@ -47,16 +47,17 @@ export const Login = () => {
 			}
 		} catch (err) {
 			console.log(err)
-			if (!err?.response) {
-				//todo: tohle napíše i když je server v pořádku a je chyba v kódu
-				setErrMsg('No Server Response');
-			} else if (err.response?.status === 400) {
-				setErrMsg('Missing Username or Password');
-			} else if (err.response?.status === 401) {
-				setErrMsg('Unauthorized');
-			} else {
-				setErrMsg('Login Failed');
-			}
+			// console.log(err?.response)
+			// if (!err?.response) {
+			// 	//todo: tohle napíše i když je server v pořádku a je chyba v kódu
+			// 	setErrMsg('No Server Response');
+			// } else if (err?.response?.status === 400) {
+			// 	setErrMsg('Missing Username or Password');
+			// } else if (err?.response?.status === 401) {
+			// 	setErrMsg('Unauthorized');
+			// } else {
+			// 	setErrMsg('Login Failed');
+			// }
 		}
 	}
 

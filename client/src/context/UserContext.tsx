@@ -1,8 +1,8 @@
-import {createContext, useState} from "react";
+import React, {createContext, JSX, useState} from "react";
 
 const UserContext = createContext({});
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }: any) => {
 	const [userObject, setUserObject] = useState({});
 
 	return (

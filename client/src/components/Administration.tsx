@@ -4,11 +4,13 @@ import {useContext, useEffect, useState} from "react";
 import axios, { getAllUsers} from "../api/Axios";
 import AuthContext from "../context/AuthProvider";
 import AppContext from "../context/AppContext";
+import {useNavigate} from "react-router-dom";
 
 export const Administration = () => {
-	const {auth} = useContext(AuthContext);
-	const {setAppObject} = useContext(AppContext);
+	const {auth}: any = useContext(AuthContext);
+	const {setAppObject}: any = useContext(AppContext);
 	const [allUsers, setAllUsers] = useState([]);
+	const navigate = useNavigate();
 
 	const fetchAllUsers = async () => {
 		try {
@@ -23,21 +25,20 @@ export const Administration = () => {
 				{
 					headers: headers,
 					// withCredentials: false,
-					mode: 'no-cors',
-
+					// mode: 'no-cors'
 				}
 			);
 
 			const apps = response?.data?.apps;
 			console.log('data ok: ', response?.data?.apps)
 			setAllUsers(response?.data.users);
-			setAppObject({apps});
+			setAppObject({'list': apps});
 
             console.log(apps)
 		} catch (err) {
 			console.log('data err: ',err);
-			console.log(err?.header)
-			console.log(err?.response?.message)
+			// console.log(err?.header)
+			// console.log(err?.response?.message)
 		}
 	}
 
@@ -51,6 +52,42 @@ export const Administration = () => {
 		fetchAllUsers();
 	}, []);
 
+	//todo otestovat
+	// const headers = {
+	// 	"Content-Type": "application/json",
+	// 	'Authorization': 'SJKNFM?NK-DFGVV-FDFVD5-vdF52-dFDF'
+	// };
+	//
+	// const fetchAllUsers = async () => {
+	// 	return await axios.post(
+	// 		"/user/all",
+	// 		{},
+	// 		{
+	// 			headers: headers,
+	// 			// withCredentials: false,
+	// 			mode: 'no-cors',
+	//
+	// 		}
+	// 	);
+	// }
+	//
+	// useEffect(() => {
+	// 	fetchAllUsers().then(r => {
+	// 		const apps = r?.data?.apps;
+	// 		console.log('data ok: ', r?.data?.apps)
+	// 		setAllUsers(r?.data.users);
+	// 		setAppObject({'list': apps});
+	//
+	// 		console.log(apps)
+	// 	}, (err) => {
+	// 		console.log('data err: ',err);
+	// 		console.log(err?.header)
+	// 		console.log(err?.response?.message)
+	// 	});
+	// }, []);
+
+
+
 	return (
 		<>
 			<Header />
@@ -58,7 +95,7 @@ export const Administration = () => {
 				<h2>Seznam uživatelů</h2>
 				<ul>
 					{allUsers.map(({ id, firstName, lastName, email }) => {
-						return <li key={id}>{firstName + " " + lastName} {email} <a href={"/administration-user-apps"}>Seznam služeb</a></li>
+						return <li key={id}>{firstName + " " + lastName} {email} <span onClick={() => navigate("/administration-user-apps")}>Seznam</span> služeb</li>
 					})}
 				</ul>
 			</section>

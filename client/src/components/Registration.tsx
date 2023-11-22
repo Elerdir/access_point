@@ -43,7 +43,7 @@ export const Registration = () => {
 		setErrMsg('');
 	}, [password, matchPassword])
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
 
 		// if button enabled with JS hack. Ochrana před hacknutím
@@ -77,15 +77,15 @@ export const Registration = () => {
 			setPassword('');
 			setMatchPassword('');
 		} catch (err) {
-			if (!err?.response) {
-				setErrMsg('No Server Response');
-			// 	jméno už je v db, todo: otestovat jestli funguje a co kontroluje
-			} else if (err.response?.status === 409) {
-				setErrMsg('Username Taken');
-			} else {
-				// todo: tady padne
-				setErrMsg('Registration Failed')
-			}
+			// if (!err?.response) {
+			// 	setErrMsg('No Server Response');
+			// // 	jméno už je v db, todo: otestovat jestli funguje a co kontroluje
+			// } else if (err.response?.status === 409) {
+			// 	setErrMsg('Username Taken');
+			// } else {
+			// 	// todo: tady padne
+			// 	setErrMsg('Registration Failed')
+			// }
 		}
 	}
 
@@ -94,12 +94,12 @@ export const Registration = () => {
 			{administration ? (
 				// todo: po registraci zústane url: /registration
 				<>
-					<Administration userObject={userObject}/>
+					<Administration />
 				</>
 			) :
 				success ? (
 					<>
-						<Signpost userObject={userObject}/>
+						<Signpost />
 					</>
 					) : (
 				<section>

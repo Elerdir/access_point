@@ -4,7 +4,7 @@ import {useState} from "react";
 export const LostPassword = () => {
 	const [user, setUser] = useState("");
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
 
 		console.log(user)

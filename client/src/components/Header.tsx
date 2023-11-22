@@ -4,8 +4,8 @@ import AuthContext from "../context/AuthProvider";
 import UserContext from "../context/UserContext";
 
 export const Header = () => {
-	const { auth } = useContext(AuthContext);
-	const { userObject } = useContext(UserContext);
+	const { auth }: any = useContext(AuthContext);
+	const { userObject }: any = useContext(UserContext);
 	const [showProfile, setShowProfile] = useState(false);
 
 	const firstName = userObject.userO?.firstName;

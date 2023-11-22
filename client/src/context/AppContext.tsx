@@ -2,9 +2,8 @@ import {createContext, useState} from "react";
 
 const AppContext = createContext({});
 
-export const AppProvider = ({ children }) => {
+export const AppProvider = ({ children }: any) => {
 	const [appObject, setAppObject] = useState({});
-	console.log(appObject)
 
 	return (
 		<AppContext.Provider value={{ appObject, setAppObject }}>

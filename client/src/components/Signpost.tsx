@@ -4,7 +4,7 @@ import {Header} from "./Header";
 import "./Signpost.css";
 
 export const Signpost = () => {
-	const [allApps, setAllApps] = useState([]);
+	const [allApps, setAllApps] = useState<[]>([]);
 
 	const fetchAllApps = () =>
 		getAllApps()
@@ -22,7 +22,7 @@ export const Signpost = () => {
 			<Header />
 			<section id={"signpost"}>
 				<h2>Vyber si službu</h2>
-				{allApps.map(({ id, appName, url }) => {
+				{allApps.map(({ id, appName, url }: {id: number, appName: string, url: string}) => {
 					return <p key={id}><a href={url}>{appName}</a> </p>
 				})}
 			</section>
