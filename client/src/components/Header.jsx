@@ -8,8 +8,8 @@ export const Header = () => {
 	const { userObject } = useContext(UserContext);
 	const [showProfile, setShowProfile] = useState(false);
 
-	const firstName = userObject.userO.firstName;
-	const lastName = userObject.userO.lastName;
+	const firstName = userObject.userO?.firstName;
+	const lastName = userObject.userO?.lastName;
 
 	const handleOnClick = () => {
 		setShowProfile(!showProfile);
@@ -17,7 +17,7 @@ export const Header = () => {
 
 	return (
 		<div id={"header"}>
-			<div id={"header-name"} onClick={handleOnClick}>{firstName.slice(0, 1) + lastName.slice(0, 1)}</div>
+			<div id={"header-name"} onClick={handleOnClick}>{firstName?.slice(0, 1) + lastName?.slice(0, 1)}</div>
 			{showProfile &&
 				<div id={"profile"}>
 					{/*{firstName + " " + lastName} {auth.user}*/}

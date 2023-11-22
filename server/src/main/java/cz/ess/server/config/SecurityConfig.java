@@ -29,6 +29,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/core/version").permitAll()
                         .requestMatchers(HttpMethod.POST, "/ap/api/registration").permitAll()
                         .requestMatchers(HttpMethod.POST, "/ap/api/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/ap/api/user/all").permitAll()
                         .anyRequest().permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);

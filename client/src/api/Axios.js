@@ -1,4 +1,6 @@
 import axios from 'axios';
+import AuthContext from "../context/AuthProvider";
+import {useContext} from "react";
 
 const baseURL = "http://localhost:8081/ap/api";
 
@@ -22,11 +24,16 @@ export const getAllApps = () =>
 		method: "GET"
 	}).then(checkStatus);
 
-// export const getAllUsers = () =>
-// 	fetch(baseURL + "/", {
-// 		headers: {"Content-Type": "application/json"},
-// 		method: "GET"
-// 	}).then(checkStatus);
+export const getAllUsers = () =>
+	// const { auth } = useContext(AuthContext);
+
+	fetch(baseURL + "/user/all", {
+		headers: {"Content-Type": "application/json", "Authorization": ".."},
+		method: "POST",
+		// withCredentials: false
+
+		// mode: 'no-cors'
+	}).then(checkStatus);
 
 
 
