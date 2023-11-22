@@ -3,11 +3,12 @@ import {Header} from "./Header";
 import {useContext, useEffect, useState} from "react";
 import axios, { getAllUsers} from "../api/Axios";
 import AuthContext from "../context/AuthProvider";
+import AppContext from "../context/AppContext";
 
 export const Administration = () => {
 	const {auth} = useContext(AuthContext);
+	const {setAppObject} = useContext(AppContext);
 	const [allUsers, setAllUsers] = useState([]);
-	const [allApps, setAllApps] = useState([]);
 
 	const fetchAllUsers = async () => {
 		try {
@@ -27,16 +28,17 @@ export const Administration = () => {
 				}
 			);
 
-			console.log('data ok: ', response?.data.users)
+			const apps = response?.data?.apps;
+			console.log('data ok: ', response?.data?.apps)
 			setAllUsers(response?.data.users);
-			setAllApps(response?.data.apps);
+			setAppObject({apps});
+
+            console.log(apps)
 		} catch (err) {
 			console.log('data err: ',err);
 			console.log(err?.header)
 			console.log(err?.response?.message)
 		}
-
-
 	}
 
 		// getAllUsers()
@@ -54,9 +56,11 @@ export const Administration = () => {
 			<Header />
 			<section id={"administration"}>
 				<h2>Seznam uživatelů</h2>
-				{allUsers.map(({ id, firstName, lastName, email }) => {
-					return <p key={id}>{firstName + " " + lastName}</p>
-				})}
+				<ul>
+					{allUsers.map(({ id, firstName, lastName, email }) => {
+						return <li key={id}>{firstName + " " + lastName} {email} <a href={"/administration-user-apps"}>Seznam služeb</a></li>
+					})}
+				</ul>
 			</section>
 		</>
 	);
