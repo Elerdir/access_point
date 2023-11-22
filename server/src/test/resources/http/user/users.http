@@ -1,1 +1,3 @@
-GET http://localhost:8081/api/user/
+POST http://localhost:8081/ap/api/user/all
+Accept: application/json
+Authorization: SJKNFM?NK-DFGVV-FDFVD5-vdF52-dFDF
