@@ -33,7 +33,7 @@ export const Login = () => {
 
 			const token = response?.data?.user?.token;
 			const administration = response?.data?.user?.administration;
-			const userO = response?.data?.user;
+			const userO = response?.data;
 
 			setUserObject({userO});
 			setAuth({ user, password, administration, token });
