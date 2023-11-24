@@ -1,32 +1,23 @@
-import {useEffect, useState} from "react";
-import {getAllApps} from "../api/Axios";
+import {useContext} from "react";
 import {Header} from "./Header";
 import "./Signpost.css";
+import UserContext from "../context/UserContext";
 
 export const Signpost = () => {
-	const [allApps, setAllApps] = useState<[]>([]);
-
-	const fetchAllApps = () =>
-		getAllApps()
-			.then(res => res.json())
-			.then(data => {
-				setAllApps(data.allApps);
-			})
-
-	useEffect(() => {
-		fetchAllApps();
-	}, []);
+	const { userObject }: any = useContext(UserContext);
 
 	return (
 		<>
 			<Header />
 			<section id={"signpost"}>
 				<h2>Vyber si službu</h2>
-				{allApps.map(({ id, appName, url }: {id: number, appName: string, url: string}) => {
+				{userObject?.userToApps ?
+					userObject.userToApps.map(({ id, appName, url }: {id: number, appName: string, url: string}) => {
 					return <p key={id}><a href={url}>{appName}</a> </p>
-				})}
+				}) :
+					<p>Zatím nemáte žádné služby</p>
+				}
 			</section>
 		</>
-
 	);
 };
