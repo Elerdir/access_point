@@ -5,9 +5,12 @@ import React, {useContext} from "react";
 import UserContext from "../context/UserContext";
 import {User} from "../impl/User";
 
-export const AdministrationUserApps: React.FC<User> = (user: User) => {
+export const AdministrationUserApps = () => {
     const {appObject}: any = useContext(AppContext);
     const { userObject }: any = useContext(UserContext);
+
+
+    console.log("uživatel: ", userObject);
 
     console.log(appObject?.list)
     console.log(userObject?.userO?.user?.userToApps)
