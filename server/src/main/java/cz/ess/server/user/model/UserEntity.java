@@ -39,7 +39,12 @@ public class UserEntity {
     @Column(name = "need_change_pwd")
     private boolean needChangePassword;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumns({
+            @JoinColumn(name = "user_id")
+            //,
+            //@JoinColumn(name = "app_id")
+    })
     private Collection<UserToAppEntity> userToApps;
 
 

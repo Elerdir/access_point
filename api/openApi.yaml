@@ -6,6 +6,19 @@ info:
 servers:
   - url: "https://access_point"
 paths:
+  /api/user/change-password:
+    post:
+      summary: "POST api/user/change-password"
+      operationId: "changePassword"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangeUserPasswordRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
   /api/user/all:
     post:
       summary: "POST api/user/all"
@@ -184,6 +197,18 @@ paths:
                 $ref: "#/components/schemas/AppResponse"
 components:
   schemas:
+    ChangeUserPasswordRequest:
+      type: "object"
+      properties:
+        userId:
+          type: "integer"
+          format: "int32"
+        username:
+          type: "string"
+        originallyPassword:
+          type: "string"
+        newPassword:
+          type: "string"
     UserListResponse:
       type: "object"
       properties:

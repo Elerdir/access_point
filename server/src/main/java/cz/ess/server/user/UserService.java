@@ -3,6 +3,7 @@ package cz.ess.server.user;
 import cz.ess.server.app.AppService;
 import cz.ess.server.app.dto.App;
 import cz.ess.server.user.dto.User;
+import cz.ess.server.user.exchange.ChangeUserPasswordRequest;
 import cz.ess.server.user.exchange.UserListResponse;
 import cz.ess.server.user.model.UserEntity;
 import cz.ess.server.user.repository.UserRepository;
@@ -48,5 +49,24 @@ public class UserService {
                 .users(allUsers)
                 .apps(allApps)
                 .build();
+    }
+
+    public void changePassword(ChangeUserPasswordRequest changeUserPasswordRequest) {
+        Optional<UserEntity> foundUser = userRepository.findById(changeUserPasswordRequest.getUserId());
+
+        if (foundUser.isEmpty()) {
+            throw new RuntimeException(String.format("User %s not exist", changeUserPasswordRequest.getUsername()));
+        }
+
+        User user = User.fromEntity(foundUser.get());
+
+        if (!user.getPassword().equals(changeUserPasswordRequest.getOriginallyPassword())) {
+            throw new RuntimeException(String.format("Invalid originally password for user %s", changeUserPasswordRequest.getUsername()));
+        }
+
+        userRepository.saveAndFlush(UserEntity.fromDto(user.toBuilder()
+                        .password(changeUserPasswordRequest.getNewPassword())
+                .build()));
+
     }
 }
