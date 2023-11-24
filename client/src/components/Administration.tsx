@@ -93,9 +93,10 @@ export const Administration = () => {
 			<Header />
 			<section id={"administration"}>
 				<h2>Seznam uživatelů</h2>
+				{/*todo: jak předat data o editovaním uživateli dál*/}
 				<ul>
 					{allUsers.map(({ id, firstName, lastName, email }) => {
-						return <li key={id}>{firstName + " " + lastName} {email} <span onClick={() => navigate("/administration-user-apps")}>Seznam</span> služeb</li>
+						return <li key={id}>{firstName + " " + lastName} {email} <span onClick={() => navigate("/administration-user-apps")}>Seznam služeb</span></li>
 					})}
 				</ul>
 			</section>

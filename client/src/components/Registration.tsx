@@ -4,6 +4,8 @@ import {Signpost} from "./Signpost";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Administration} from "./Administration";
+// todo: nešla spustit aplikace s hromadou chyb
+// import bcrypt from "bcrypt";
 
 const PASSWORD_REGEX = /^(?=.*[a-z]).{3,24}$/;
 const REGISTER_URL = '/registration';
@@ -54,8 +56,11 @@ export const Registration = () => {
 			return;
 		}
 
+		// const hashedPassword = bcrypt.hash(password, 10);
+
 		try {
 			const response = await axios.post(REGISTER_URL,
+				// JSON.stringify({ email, hashedPassword, firstName, lastName, birthDate }),
 				JSON.stringify({ email, password, firstName, lastName, birthDate }),
 				{
 					headers: { 'Content-Type': 'application/json' },

@@ -8,14 +8,24 @@ export const AdministrationUserApps = () => {
     const {appObject}: any = useContext(AppContext);
     const { userObject }: any = useContext(UserContext);
 
-    console.log(userObject?.list)
+    console.log(appObject?.list)
+    console.log(userObject?.userO?.user?.userToApps)
 
     return (
         <>
             <Header />
             <section id={"administration-user-apps"}>
+                {/*todo: načíst aplikace upravovaného uživatele a ne admina*/}
+                {/*{userObject?.userO?.user?.userToApps ?*/}
+                {/*    userObject?.userO?.apps.filter(({ id }: {id: number}) => {*/}
+                {/*        return id === userObject?.userO?.user?.userToApps.map(({appId}: {appId: number}) => appId)[0]*/}
+                {/*    }).map(({ appName, url }: {appName: number, url: number}) => {*/}
+                {/*        return <p><a href={`${url}`}>{appName}</a></p>*/}
+                {/*    }) :*/}
+                {/*    <p>Zatím nemáte žádné služby</p>*/}
+                {/*}*/}
                 <ul>
-                    {userObject?.list.map(({id, appName, defaultApp, url}: {id: number, appName: string, defaultApp: boolean, url: string}) => {
+                    {appObject?.list.map(({id, appName, defaultApp, url}: {id: number, appName: string, defaultApp: boolean, url: string}) => {
                         return <li key={id}>{appName} {defaultApp} {url}</li>
                     })}
                 </ul>
