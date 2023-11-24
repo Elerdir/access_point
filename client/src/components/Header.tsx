@@ -8,8 +8,8 @@ export const Header = () => {
 	const { userObject }: any = useContext(UserContext);
 	const [showProfile, setShowProfile] = useState(false);
 
-	const firstName = userObject.userO?.firstName;
-	const lastName = userObject.userO?.lastName;
+	const firstName = userObject.userO?.user?.firstName;
+	const lastName = userObject.userO?.user?.lastName;
 
 	const handleOnClick = () => {
 		setShowProfile(!showProfile);
