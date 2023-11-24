@@ -1,10 +1,11 @@
 import "./AdministrationUserApps.css";
 import {Header} from "./Header";
 import AppContext from "../context/AppContext";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import UserContext from "../context/UserContext";
+import {User} from "../impl/User";
 
-export const AdministrationUserApps = () => {
+export const AdministrationUserApps: React.FC<User> = (user: User) => {
     const {appObject}: any = useContext(AppContext);
     const { userObject }: any = useContext(UserContext);
 

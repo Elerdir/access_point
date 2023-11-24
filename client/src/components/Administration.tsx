@@ -5,6 +5,7 @@ import axios, { getAllUsers} from "../api/Axios";
 import AuthContext from "../context/AuthProvider";
 import AppContext from "../context/AppContext";
 import {useNavigate} from "react-router-dom";
+import {User} from "../impl/User";
 
 export const Administration = () => {
 	const {auth}: any = useContext(AuthContext);
@@ -95,8 +96,8 @@ export const Administration = () => {
 				<h2>Seznam uživatelů</h2>
 				{/*todo: jak předat data o editovaním uživateli dál*/}
 				<ul>
-					{allUsers.map(({ id, firstName, lastName, email }) => {
-						return <li key={id}>{firstName + " " + lastName} {email} <span onClick={() => navigate("/administration-user-apps")}>Seznam služeb</span></li>
+					{allUsers.map((user: User) => {
+						return <li key={user.id}>{user.firstName + " " + user.lastName} {user.email} <span onClick={() => navigate("/administration-user-apps", {state: {data: user}})}>Seznam služeb</span></li>
 					})}
 				</ul>
 			</section>
