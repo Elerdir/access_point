@@ -52,7 +52,7 @@ public class UserService {
     }
 
     public void changePassword(ChangeUserPasswordRequest changeUserPasswordRequest) {
-        Optional<UserEntity> foundUser = userRepository.findById(changeUserPasswordRequest.getUserId());
+        Optional<UserEntity> foundUser = userRepository.findById((int) changeUserPasswordRequest.getUserId());
 
         if (foundUser.isEmpty()) {
             throw new RuntimeException(String.format("User %s not exist", changeUserPasswordRequest.getUsername()));
